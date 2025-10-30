@@ -141,7 +141,7 @@ const ecosystemContacts = {
         scope: "Linux kernel, Linux Foundation projects, and related infrastructure",
         category: "ecosystem"
     },
-    
+
     // CSIRTs and National Cybersecurity Organizations
     "cert-cc": {
         name: "CERT/CC (Carnegie Mellon)",
@@ -346,44 +346,6 @@ const scenarioData = {
                 description: "Best practices for responsible vulnerability disclosure",
                 action: "Read Guidelines",
                 link: "#",
-                urgent: false
-            }
-        ]
-    },
-    tools: {
-        title: "Need Help Configuring Security Tools",
-        urgency: "⚠️ MEDIUM PRIORITY",
-        urgencyClass: "urgency-medium",
-        description: `
-            <p>Setting up security tools like SAST, DAST, or SCA can be complex. Get expert guidance to ensure proper configuration and maximize protection for your project.</p>
-            <h4>Available Help:</h4>
-            <ul>
-                <li>Tool selection guidance based on your tech stack</li>
-                <li>Step-by-step configuration assistance</li>
-                <li>Best practices for CI/CD integration</li>
-                <li>Free tool programs for OSS projects</li>
-            </ul>
-        `,
-        resources: [
-            {
-                title: "GitHub Security Features Setup",
-                description: "Free Dependabot, CodeQL, and secret scanning for OSS projects",
-                action: "Enable GitHub Security",
-                link: "https://github.com/features/security",
-                urgent: false
-            },
-            {
-                title: "OpenSSF Tooling Working Group",
-                description: "Community support for security tool selection and configuration",
-                action: "Join Community",
-                link: "#",
-                urgent: false
-            },
-            {
-                title: "Security Tool Configuration Help",
-                description: "Request personalized assistance with tool setup",
-                action: "Request Help",
-                link: "mailto:security-help@example.org?subject=Tool Configuration Help for [Project Name]",
                 urgent: false
             }
         ]
@@ -656,7 +618,7 @@ function initializeModal() {
 function showEcosystemContacts() {
     modalTitle.textContent = "Ecosystem-Specific Security Contacts";
     modalUrgency.innerHTML = '<div class="urgency-badge urgency-low">📍 ECOSYSTEM CONTACTS</div>';
-    
+
     modalDescription.innerHTML = `
         <p>Find security contacts for specific programming languages, package managers, and technology ecosystems:</p>
         <div class="ecosystem-search">
@@ -673,9 +635,9 @@ function showEcosystemContacts() {
                 <p class="ecosystem-description">${contact.description}</p>
                 <div class="contact-info">
                     <div class="contact-detail">
-                        <strong>Contact:</strong> 
-                        ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
-                            contact.contactEmail : 
+                        <strong>Contact:</strong>
+                        ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ?
+                            contact.contactEmail :
                             `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
                         }
                     </div>
@@ -693,7 +655,7 @@ function showEcosystemContacts() {
         `;
     });
     contactsHTML += '</div>';
-    
+
     modalResources.innerHTML = contactsHTML;
 
     modalActions.innerHTML = `
@@ -718,7 +680,7 @@ function initializeEcosystemContacts() {
             'csirt': 'CSIRT',
             'national': 'National Cybersecurity'
         }[contact.category] || 'Other';
-        
+
         contactsHTML += `
             <div class="ecosystem-card" data-ecosystem="${key}">
                 <div class="ecosystem-header">
@@ -731,8 +693,8 @@ function initializeEcosystemContacts() {
                         <div class="contact-item">
                             <strong>Contact:</strong>
                             <span class="contact-value">
-                                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
-                                    contact.contactEmail : 
+                                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ?
+                                    contact.contactEmail :
                                     `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
                                 }
                             </span>
@@ -750,7 +712,7 @@ function initializeEcosystemContacts() {
             </div>
         `;
     });
-    
+
     ecosystemGrid.innerHTML = contactsHTML;
 
     // Initialize ecosystem filter
@@ -758,7 +720,7 @@ function initializeEcosystemContacts() {
     if (filterInput) {
         filterInput.addEventListener('keyup', filterEcosystemCards);
     }
-    
+
     // Initialize category filter
     const categoryFilter = document.getElementById('category-filter');
     if (categoryFilter) {
@@ -771,18 +733,18 @@ function filterEcosystemCards() {
     const searchTerm = document.getElementById('ecosystem-filter-input').value.toLowerCase();
     const categoryFilter = document.getElementById('category-filter')?.value || 'all';
     const cards = document.querySelectorAll('.ecosystem-card');
-    
+
     cards.forEach(card => {
         const ecosystem = card.dataset.ecosystem;
         const contact = ecosystemContacts[ecosystem];
         const searchText = `${contact.name} ${contact.description} ${contact.scope}`.toLowerCase();
-        
+
         // Check category filter
         const categoryMatch = categoryFilter === 'all' || contact.category === categoryFilter;
-        
+
         // Check search term
         const searchMatch = !searchTerm || searchText.includes(searchTerm);
-        
+
         if (categoryMatch && searchMatch) {
             card.style.display = 'block';
             card.style.animation = 'fadeIn 0.3s ease-out';
@@ -799,7 +761,7 @@ function showEcosystemDetails(ecosystemKey) {
 
     modalTitle.textContent = `${contact.name} Security Contact`;
     modalUrgency.innerHTML = '<div class="urgency-badge urgency-low">📍 ECOSYSTEM CONTACT</div>';
-    
+
     modalDescription.innerHTML = `
         <p><strong>Description:</strong> ${contact.description}</p>
         <p><strong>Reporting Process:</strong> ${contact.reportingProcess}</p>
@@ -812,9 +774,9 @@ function showEcosystemDetails(ecosystemKey) {
             <h5>Security Contact</h5>
             <p>Primary contact for security vulnerabilities</p>
             <div class="contact-detail">
-                <strong>Email:</strong> 
-                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
-                    contact.contactEmail : 
+                <strong>Email:</strong>
+                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ?
+                    contact.contactEmail :
                     `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
                 }
             </div>
@@ -841,18 +803,18 @@ function filterEcosystems() {
     const searchTerm = document.getElementById('ecosystem-filter-input').value.toLowerCase();
     const categoryFilter = document.getElementById('category-filter')?.value || 'all';
     const cards = document.querySelectorAll('.ecosystem-contact-card');
-    
+
     cards.forEach(card => {
         const ecosystem = card.dataset.ecosystem;
         const contact = ecosystemContacts[ecosystem];
         const searchText = `${contact.name} ${contact.description} ${contact.scope}`.toLowerCase();
-        
+
         // Check category filter
         const categoryMatch = categoryFilter === 'all' || contact.category === categoryFilter;
-        
+
         // Check search term
         const searchMatch = !searchTerm || searchText.includes(searchTerm);
-        
+
         if (categoryMatch && searchMatch) {
             card.style.display = 'block';
             card.style.animation = 'fadeIn 0.3s ease-out';
@@ -1074,7 +1036,7 @@ function showSection(sectionId) {
             section.style.display = section.id === sectionId ? 'block' : 'none';
         }
     });
-    
+
     // Update active nav link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -1094,26 +1056,26 @@ function initializeNavigation() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
-            
+
             // Show the target section
             if (targetId) {
                 showSection(targetId);
-                
+
                 // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
+
                 // Update URL hash
                 history.pushState(null, null, `#${targetId}`);
             }
         });
     });
-    
+
     // Handle browser back/forward
     window.addEventListener('popstate', () => {
         const hash = window.location.hash.substring(1);
         showSection(hash || 'home');
     });
-    
+
     // Show initial section based on URL hash
     const initialHash = window.location.hash.substring(1);
     showSection(initialHash || 'home');
