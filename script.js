@@ -362,9 +362,20 @@ const scenarioData = {
                 <li>Patch development assistance</li>
                 <li>Architecture guidance for security improvements</li>
                 <li>Testing strategies for security fixes</li>
+                <li><strong>AI-Powered Assistance:</strong> GitHub Copilot Autofix, Snyk DeepCode, and other AI tools can suggest fixes for common vulnerabilities</li>
             </ul>
+            <div class="alert alert-info">
+                <strong>⚠️ AI Safety Note:</strong> Always review and thoroughly test AI-generated security fixes before deploying. AI can help identify patterns but may miss context-specific security requirements.
+            </div>
         `,
         resources: [
+            {
+                title: "GitHub Copilot Autofix",
+                description: "AI-powered automatic vulnerability fixes for CodeQL security alerts",
+                action: "Learn More",
+                link: "https://github.blog/2024-03-20-found-means-fixed-introducing-autofix-for-codeql-code-scanning/",
+                urgent: false
+            },
             {
                 title: "Security Code Review Program",
                 description: "Pro-bono security code review from vetted experts",

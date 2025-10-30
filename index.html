@@ -494,6 +494,19 @@
                     <p>Proactive security is more effective and less costly than reactive responses. These practices help you build security into your development process from the start.</p>
                 </div>
 
+                <div class="getting-started-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-bottom: 2rem;">
+                    <h3 style="color: white; margin-top: 0;">🤖 Using AI for Security: Important Guidelines</h3>
+                    <p style="color: white;">AI-powered security tools can significantly enhance your security posture, but they require careful use:</p>
+                    <ul style="color: white;">
+                        <li><strong>Always verify AI suggestions:</strong> AI tools can miss context-specific security requirements</li>
+                        <li><strong>Test thoroughly:</strong> Never deploy AI-generated security fixes without comprehensive testing</li>
+                        <li><strong>Understand the code:</strong> Don't apply fixes you don't understand, even if AI recommends them</li>
+                        <li><strong>Use as assistance, not replacement:</strong> AI complements human expertise but doesn't replace security reviews</li>
+                        <li><strong>Check for bias:</strong> AI models may have blind spots or biases based on their training data</li>
+                    </ul>
+                    <p style="color: white; margin-bottom: 0;"><em>AI is a powerful tool in your security toolkit—use it wisely and with appropriate skepticism.</em></p>
+                </div>
+
                 <div class="practice-categories">
                     <div class="practice-category">
                         <h3>🔒 Code Security</h3>
@@ -510,6 +523,18 @@
                             </div>
 
                             <div class="practice-item">
+                                <h4>AI-Powered Code Security</h4>
+                                <p>Leverage AI to detect vulnerabilities and suggest fixes</p>
+                                <ul>
+                                    <li><strong>GitHub Copilot Autofix:</strong> AI-generated vulnerability fixes for CodeQL alerts</li>
+                                    <li><strong>Snyk DeepCode:</strong> AI-powered code analysis with fix suggestions</li>
+                                    <li><strong>Amazon CodeGuru Security:</strong> ML-based security recommendations</li>
+                                    <li><strong>⚠️ Important:</strong> Always review and test AI-generated security fixes before deploying</li>
+                                </ul>
+                                <a href="https://github.blog/2024-03-20-found-means-fixed-introducing-copilot-autofix/" class="btn btn-outline" target="_blank">GitHub Copilot Autofix</a>
+                            </div>
+
+                            <div class="practice-item">
                                 <h4>Secure Code Review</h4>
                                 <p>Establish security-focused code review processes</p>
                                 <ul>
@@ -517,6 +542,7 @@
                                     <li>Use security checklists and guidelines</li>
                                     <li>Require multiple reviewers for sensitive code</li>
                                     <li>Document security decisions and rationale</li>
+                                    <li><strong>AI Assistance:</strong> Use AI coding assistants to spot security patterns, but verify recommendations</li>
                                 </ul>
                                 <a href="https://owasp.org/www-project-code-review-guide/" class="btn btn-outline" target="_blank">OWASP Code Review Guide</a>
                             </div>
@@ -793,6 +819,174 @@
             </div>
         </section>
 
+        <!-- Security Policies Section -->
+        <section id="security-policies" class="workflow-section">
+            <div class="container">
+                <h2 class="section-title">📋 Security Policies & Documentation</h2>
+                <p class="section-subtitle">Create clear security policies and disclosure processes for your project</p>
+
+                <div class="best-practices-intro">
+                    <p>Well-documented security policies help researchers report vulnerabilities responsibly and set clear expectations for your users and contributors.</p>
+                </div>
+
+                <div class="practice-categories">
+                    <div class="practice-category">
+                        <h3>📄 SECURITY.md - Vulnerability Disclosure Policy</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Create Your SECURITY.md File</h4>
+                                <p>The most important security document for your project</p>
+                                <ul>
+                                    <li><strong>Location:</strong> Place in repository root or <code>.github/SECURITY.md</code></li>
+                                    <li><strong>Supported Versions:</strong> List which versions receive security updates</li>
+                                    <li><strong>Reporting Process:</strong> Clear instructions for reporting vulnerabilities</li>
+                                    <li><strong>Contact Information:</strong> Email, security@domain, or GitHub private reporting</li>
+                                    <li><strong>Response Timeline:</strong> Expected acknowledgment and fix timelines</li>
+                                    <li><strong>Disclosure Policy:</strong> Coordinated disclosure timeline (typically 90 days)</li>
+                                    <li><strong>PGP Key (Optional):</strong> For encrypted communication</li>
+                                </ul>
+                                <a href="https://github.com/ossf/oss-vulnerability-guide/tree/main/templates/security_policies" class="btn btn-outline" target="_blank">View SECURITY.md Templates</a>
+                            </div>
+
+                            <div class="practice-item">
+                                <h4>Example SECURITY.md Structure</h4>
+                                <p>A basic template to get started</p>
+                                <pre style="background: #f3f4f6; padding: 1rem; border-radius: 6px; overflow-x: auto;">
+# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 2.x     | :white_check_mark: |
+| 1.x     | :x:                |
+
+## Reporting a Vulnerability
+
+Please report security vulnerabilities to security@example.org
+
+- You should receive acknowledgment within 48 hours
+- We will provide regular updates on progress
+- Please allow 90 days for coordinated disclosure
+
+Do NOT open public issues for security vulnerabilities.
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-category">
+                        <h3>🔒 Private Vulnerability Reporting</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>GitHub Private Vulnerability Reporting</h4>
+                                <p>Enable built-in private reporting for your repository</p>
+                                <ul>
+                                    <li><strong>Enable in Settings:</strong> Go to Settings → Code security and analysis</li>
+                                    <li><strong>Private Reporting:</strong> Researchers can submit reports directly through GitHub</li>
+                                    <li><strong>Manage in Security Tab:</strong> Review and discuss privately before disclosure</li>
+                                    <li><strong>Create Advisories:</strong> Publish coordinated security advisories</li>
+                                    <li><strong>Request CVEs:</strong> Request CVE IDs directly from GitHub</li>
+                                </ul>
+                                <a href="https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability" class="btn btn-outline" target="_blank">Setup Private Reporting</a>
+                            </div>
+
+                            <div class="practice-item">
+                                <h4>Alternative Reporting Channels</h4>
+                                <p>Provide multiple ways for researchers to contact you</p>
+                                <ul>
+                                    <li><strong>Dedicated Email:</strong> security@yourdomain.org</li>
+                                    <li><strong>Bug Bounty Platforms:</strong> HackerOne, Bugcrowd, Intigriti</li>
+                                    <li><strong>Security.txt:</strong> Machine-readable security contact info (/.well-known/security.txt)</li>
+                                    <li><strong>PGP/GPG:</strong> Encrypted communication option</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-category">
+                        <h3>📝 Security Documentation</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Security Guidelines for Users</h4>
+                                <p>Document security best practices for your software</p>
+                                <ul>
+                                    <li><strong>Secure Configuration:</strong> Recommended security settings</li>
+                                    <li><strong>Authentication & Authorization:</strong> How to properly configure access controls</li>
+                                    <li><strong>Known Limitations:</strong> Security boundaries and limitations</li>
+                                    <li><strong>Security Changelog:</strong> Track security fixes in releases</li>
+                                    <li><strong>Threat Model:</strong> What your software protects against (and doesn't)</li>
+                                </ul>
+                            </div>
+
+                            <div class="practice-item">
+                                <h4>Security for Contributors</h4>
+                                <p>Guidelines for developers contributing to your project</p>
+                                <ul>
+                                    <li><strong>Secure Coding Guidelines:</strong> Security requirements for contributions</li>
+                                    <li><strong>Code Review Process:</strong> Security-focused review checklist</li>
+                                    <li><strong>Dependency Management:</strong> How to add/update dependencies safely</li>
+                                    <li><strong>Security Testing:</strong> Required security tests before merging</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-category">
+                        <h3>🎯 Coordinated Vulnerability Disclosure (CVD) Policy</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Set Disclosure Expectations</h4>
+                                <p>Define how you'll handle vulnerability disclosures</p>
+                                <ul>
+                                    <li><strong>Acknowledgment Timeline:</strong> Initial response within 24-72 hours</li>
+                                    <li><strong>Triage Timeline:</strong> Severity assessment within 1 week</li>
+                                    <li><strong>Fix Timeline:</strong> Development timeline based on severity</li>
+                                    <li><strong>Disclosure Timeline:</strong> Typically 90 days from initial report</li>
+                                    <li><strong>Early Disclosure:</strong> Conditions for earlier public disclosure</li>
+                                    <li><strong>Researcher Credit:</strong> How researchers will be credited</li>
+                                </ul>
+                                <a href="https://github.com/ossf/oss-vulnerability-guide/blob/main/maintainer-guide.md" class="btn btn-outline" target="_blank">CVD Guide for Maintainers</a>
+                            </div>
+
+                            <div class="practice-item">
+                                <h4>Severity Classification</h4>
+                                <p>Use standardized severity ratings</p>
+                                <ul>
+                                    <li><strong>CVSS Scoring:</strong> Use Common Vulnerability Scoring System</li>
+                                    <li><strong>Critical (9.0-10.0):</strong> Immediate action required</li>
+                                    <li><strong>High (7.0-8.9):</strong> Urgent fix needed</li>
+                                    <li><strong>Medium (4.0-6.9):</strong> Fix in next release</li>
+                                    <li><strong>Low (0.1-3.9):</strong> Fix when convenient</li>
+                                </ul>
+                                <a href="https://www.first.org/cvss/calculator/3.1" class="btn btn-outline" target="_blank">CVSS Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="getting-started-box">
+                    <h3>🚀 Quick Start - Essential Policies</h3>
+                    <p>Start with these three essential security policies:</p>
+                    <ol>
+                        <li><strong>Create SECURITY.md:</strong> Use a template and customize for your project (15 minutes)</li>
+                        <li><strong>Enable GitHub Private Reporting:</strong> Turn on in repository settings (2 minutes)</li>
+                        <li><strong>Document Supported Versions:</strong> Clearly state which versions get security updates (5 minutes)</li>
+                    </ol>
+                    <p><strong>Template Resources:</strong></p>
+                    <ul>
+                        <li><a href="https://github.com/ossf/oss-vulnerability-guide/tree/main/templates/security_policies" target="_blank">OpenSSF SECURITY.md Templates</a></li>
+                        <li><a href="https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository" target="_blank">GitHub Security Policy Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="workflow-actions">
+                    <a href="#maintainer-workflow" class="btn btn-secondary">Back to Maintainer Workflow</a>
+                    <a href="#home" class="btn btn-outline">Back to Home</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Ecosystem Contacts Section -->
         <section id="ecosystem-contacts" class="ecosystem-contacts">
             <div class="container">
@@ -893,6 +1087,24 @@
                         <h4>Sigstore</h4>
                         <p>Free software signing and verification infrastructure for the open source ecosystem.</p>
                         <a href="https://www.sigstore.dev/" class="btn btn-outline" target="_blank">Details</a>
+                    </div>
+
+                    <div class="resource-card" data-category="tooling">
+                        <h4>GitHub Copilot Autofix</h4>
+                        <p>AI-powered automatic vulnerability fixes for CodeQL security alerts in your repository.</p>
+                        <a href="https://github.blog/2024-03-20-found-means-fixed-introducing-autofix-for-codeql-code-scanning/" class="btn btn-outline" target="_blank">Details</a>
+                    </div>
+
+                    <div class="resource-card" data-category="tooling">
+                        <h4>Snyk DeepCode AI</h4>
+                        <p>AI-driven code analysis that learns from millions of open source projects to find security issues.</p>
+                        <a href="https://snyk.io/product/snyk-code/" class="btn btn-outline" target="_blank">Details</a>
+                    </div>
+
+                    <div class="resource-card" data-category="tooling">
+                        <h4>Amazon CodeGuru Security</h4>
+                        <p>Machine learning-powered security vulnerability detection and code quality recommendations.</p>
+                        <a href="https://aws.amazon.com/codeguru/features/" class="btn btn-outline" target="_blank">Details</a>
                     </div>
 
                     <!-- Funding Resources -->
