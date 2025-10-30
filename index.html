@@ -14,11 +14,13 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="logo">🔐 OSS Security Navigator</h1>
+            <h1 class="logo"><a href="#home"></a>🔐 OSS Security Navigator</a></h1>
             <nav class="nav">
                 <a href="#home" class="nav-link">Home</a>
-                <a href="#scenarios" class="nav-link">Get Help</a>
-                <a href="#resources" class="nav-link">Resources</a>
+                <a href="#researcher-workflow" class="nav-link">For Researchers</a>
+                <a href="#maintainer-workflow" class="nav-link">For Maintainers</a>
+                <a href="#ecosystem-contacts" class="nav-link">Security Contacts</a>
+                <a href="#openssf-community" class="nav-link">Join OpenSSF</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
         </div>
@@ -30,18 +32,33 @@
         <section id="home" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h2 class="hero-title">Security help for open source maintainers</h2>
+                    <h2 class="hero-title">Security help for the open source community</h2>
                     <p class="hero-subtitle">
-                        Facing a security challenge with your open source project?
-                        Get connected to the right resources and expert help quickly.
+                        Whether you're a researcher disclosing vulnerabilities or a maintainer securing your project,
+                        get connected to the right resources and expert help quickly.
                     </p>
-                    <div class="hero-cta">
-                        <a href="#scenarios" class="btn btn-primary">Find Security Help</a>
-                        <a href="#resources" class="btn btn-secondary">Browse Resources</a>
+                    
+                    <!-- User Type Selection -->
+                    <div class="user-workflows">
+                        <div class="workflow-card">
+                            <div class="workflow-icon">🔍</div>
+                            <h3>Security Researcher</h3>
+                            <p>Found a vulnerability? Get guidance on responsible disclosure and connecting with the right maintainers.</p>
+                            <a href="#researcher-workflow" class="btn btn-primary">I'm Reporting a Vulnerability</a>
+                        </div>
+                        
+                        <div class="workflow-card">
+                            <div class="workflow-icon">🛠️</div>
+                            <h3>Project Maintainer</h3>
+                            <p>Need help securing your open source project? Find security resources, tools, and expert guidance.</p>
+                            <a href="#maintainer-workflow" class="btn btn-primary">I'm Securing My Project</a>
+                        </div>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="security-icon">🛡️</div>
+                    
+                    <div class="additional-resources">
+                        <a href="#ecosystem-contacts" class="btn btn-secondary">Ecosystem Security Contacts</a>
+                        <a href="#openssf-community" class="btn btn-outline">Join the Security Community</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -52,6 +69,475 @@
                 <div class="mission-content">
                     <h3>Our Mission</h3>
                     <p>To provide a clear, actionable workflow that connects open-source maintainers facing security challenges with appropriate, immediate, and high-quality assistance resources. Reduce friction and burnout by providing a single, trusted starting point for security help.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Researcher Workflow Section -->
+        <section id="researcher-workflow" class="workflow-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">🔍 Security Researcher Workflow</h2>
+                <p class="section-subtitle">Found a vulnerability in an open source project? Here's your step-by-step guide to responsible disclosure.</p>
+                
+                <div class="openssf-callout">
+                    <strong>📖 Comprehensive Guide Available:</strong> For the complete OpenSSF guide to coordinated vulnerability disclosure for security researchers, see the 
+                    <a href="https://github.com/ossf/oss-vulnerability-guide/blob/main/finder-guide.md" target="_blank">Finder's Guide to CVD</a> 
+                    and <a href="https://github.com/ossf/oss-vulnerability-guide/blob/main/runbook.md" target="_blank">CVD Runbook</a>.
+                </div>
+                
+                <div class="workflow-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Find the Security Policy & Contact</h3>
+                            <p>Before reporting, locate the project's preferred reporting method:</p>
+                            <ul>
+                                <li><strong>GitHub Security Policy:</strong> Look for <code>SECURITY.md</code> in the repository root or <code>.github/SECURITY.md</code></li>
+                                <li><strong>Security Tab:</strong> Check the "Security" tab on GitHub repositories (if enabled)</li>
+                                <li><strong>Private Vulnerability Reporting:</strong> Some projects enable GitHub's private reporting feature</li>
+                                <li><strong>README.md:</strong> Check for security contact information or email addresses</li>
+                                <li><strong>Package Metadata:</strong> Look in package.json, setup.py, Cargo.toml, etc.</li>
+                                <li><strong>Bug Bounty Programs:</strong> Search HackerOne, Bugcrowd, or Intigriti for active programs</li>
+                            </ul>
+                            <p class="step-tip">💡 <strong>Tip:</strong> If you can't find contact info, try <a href="#ecosystem-contacts">ecosystem-level contacts</a> for the language/platform, or use GitHub Security Advisories to report privately.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Assess Severity & Impact</h3>
+                            <p>Understand the severity to determine urgency and disclosure timeline:</p>
+                            <div class="severity-guide">
+                                <div class="severity-item critical">
+                                    <strong>🚨 Critical (CVSS 9.0-10.0)</strong>
+                                    <ul>
+                                        <li>Remote Code Execution (RCE) without authentication</li>
+                                        <li>Active exploitation in the wild</li>
+                                        <li>Mass data exposure or credential leakage</li>
+                                        <li>Complete system compromise</li>
+                                    </ul>
+                                    <p class="timeline"><strong>Timeline:</strong> Report immediately, 7-14 day disclosure window</p>
+                                </div>
+                                
+                                <div class="severity-item high">
+                                    <strong>⚠️ High (CVSS 7.0-8.9)</strong>
+                                    <ul>
+                                        <li>Authentication bypass or privilege escalation</li>
+                                        <li>SQL injection, XSS in critical contexts</li>
+                                        <li>Significant data exposure</li>
+                                        <li>Crypto vulnerabilities affecting confidentiality</li>
+                                    </ul>
+                                    <p class="timeline"><strong>Timeline:</strong> 30-60 day disclosure window</p>
+                                </div>
+                                
+                                <div class="severity-item medium">
+                                    <strong>⚡ Medium (CVSS 4.0-6.9)</strong>
+                                    <ul>
+                                        <li>Information disclosure (non-critical)</li>
+                                        <li>DoS requiring significant resources</li>
+                                        <li>XSS in limited contexts</li>
+                                        <li>CSRF in non-critical operations</li>
+                                    </ul>
+                                    <p class="timeline"><strong>Timeline:</strong> 60-90 day disclosure window</p>
+                                </div>
+                                
+                                <div class="severity-item low">
+                                    <strong>ℹ️ Low (CVSS 0.1-3.9)</strong>
+                                    <ul>
+                                        <li>Security misconfigurations</li>
+                                        <li>Minor information leakage</li>
+                                        <li>Best practice violations</li>
+                                        <li>Theoretical vulnerabilities with no clear exploit</li>
+                                    </ul>
+                                    <p class="timeline"><strong>Timeline:</strong> 90+ day disclosure window</p>
+                                </div>
+                            </div>
+                            <p class="step-tip">💡 <strong>Tip:</strong> Use the <a href="https://www.first.org/cvss/calculator/3.1" target="_blank">CVSS Calculator</a> to determine the score objectively.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Prepare Your Report</h3>
+                            <p>Create a clear, actionable vulnerability report including:</p>
+                            <div class="report-checklist">
+                                <div class="checklist-section">
+                                    <h4>Essential Information</h4>
+                                    <ul>
+                                        <li><strong>Vulnerability Type:</strong> What category (e.g., RCE, XSS, SQLi, etc.)</li>
+                                        <li><strong>Affected Versions:</strong> Which versions are vulnerable</li>
+                                        <li><strong>Attack Vector:</strong> How can it be exploited (local/network/adjacent)</li>
+                                        <li><strong>Prerequisites:</strong> What access level is needed</li>
+                                        <li><strong>Impact:</strong> What can an attacker achieve</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="checklist-section">
+                                    <h4>Reproduction Steps</h4>
+                                    <ul>
+                                        <li>Step-by-step instructions to reproduce</li>
+                                        <li>Environment details (OS, browser, dependencies)</li>
+                                        <li>Proof-of-concept code (if safe to share)</li>
+                                        <li>Screenshots or video demonstration (if helpful)</li>
+                                        <li>Expected vs actual behavior</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="checklist-section">
+                                    <h4>Additional Context</h4>
+                                    <ul>
+                                        <li><strong>Suggested Fix:</strong> Remediation recommendations (if you have them)</li>
+                                        <li><strong>Related CVEs:</strong> Similar vulnerabilities in other projects</li>
+                                        <li><strong>Discovery Method:</strong> How you found it (optional but helpful)</li>
+                                        <li><strong>Disclosure Preferences:</strong> Your timeline and credit preferences</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="step-tip">💡 <strong>Tip:</strong> Don't include exploits for active attacks or weaponized code. Share enough to validate, not enough to cause harm.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Report Securely</h3>
+                            <p>Choose the most secure communication method available:</p>
+                            <div class="communication-methods">
+                                <div class="method-item preferred">
+                                    <strong>✅ Preferred Methods</strong>
+                                    <ul>
+                                        <li><strong>GitHub Private Vulnerability Reporting:</strong> Built-in, encrypted, easy for both parties</li>
+                                        <li><strong>Bug Bounty Platforms:</strong> HackerOne, Bugcrowd (managed process, potential rewards)</li>
+                                        <li><strong>PGP-Encrypted Email:</strong> If maintainer provides a public key</li>
+                                        <li><strong>Security-Specific Email:</strong> security@project.org (if listed in SECURITY.md)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="method-item acceptable">
+                                    <strong>⚠️ Acceptable (with caution)</strong>
+                                    <ul>
+                                        <li><strong>Direct Email to Maintainers:</strong> For low-severity issues only</li>
+                                        <li><strong>Encrypted Messaging:</strong> Signal, Wire (if maintainer provides contact)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="method-item avoid">
+                                    <strong>❌ Avoid These</strong>
+                                    <ul>
+                                        <li>Public GitHub Issues (before coordinated disclosure)</li>
+                                        <li>Social media, forums, or public channels</li>
+                                        <li>Unencrypted email for critical vulnerabilities</li>
+                                        <li>Simultaneous public disclosure ("full disclosure")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Coordinate Disclosure</h3>
+                            <p>Work with maintainers for responsible disclosure:</p>
+                            <ul>
+                                <li><strong>Set Expectations:</strong> Propose a disclosure timeline based on severity</li>
+                                <li><strong>Be Patient:</strong> Many OSS maintainers are volunteers with limited time</li>
+                                <li><strong>Follow Up:</strong> If no response in 5-7 days, send a polite reminder</li>
+                                <li><strong>Escalate if Needed:</strong> After reasonable time, consider ecosystem coordinators or CVE Numbering Authorities</li>
+                                <li><strong>Agree on Disclosure Date:</strong> Coordinate public disclosure timing</li>
+                                <li><strong>Credit and Attribution:</strong> Discuss how you'll be credited (if desired)</li>
+                            </ul>
+                            <div class="disclosure-timeline">
+                                <h4>Typical Timeline</h4>
+                                <ul>
+                                    <li><strong>Day 0:</strong> Initial report submitted</li>
+                                    <li><strong>Day 1-7:</strong> Maintainer acknowledges receipt</li>
+                                    <li><strong>Day 7-30:</strong> Maintainer confirms/validates vulnerability</li>
+                                    <li><strong>Day 30-60:</strong> Fix development and testing</li>
+                                    <li><strong>Day 60-90:</strong> Patched version released</li>
+                                    <li><strong>Day 90+:</strong> Public disclosure and CVE publication</li>
+                                </ul>
+                            </div>
+                            <p class="step-tip">💡 <strong>Tip:</strong> If a maintainer is unresponsive or hostile, escalate to ecosystem coordinators rather than rushing to public disclosure.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="emergency-contacts">
+                    <h3>🚨 When You Can't Reach the Maintainer</h3>
+                    <p>If the project is unmaintained, maintainers are unresponsive, or the vulnerability is being actively exploited:</p>
+                    <div class="contact-grid">
+                        <div class="emergency-contact">
+                            <strong>CERT/CC (Carnegie Mellon)</strong>
+                            <p><a href="mailto:cert@cert.org">cert@cert.org</a></p>
+                            <p>Global vulnerability coordination and disclosure assistance</p>
+                            <a href="https://www.sei.cmu.edu/about/divisions/cert/" target="_blank">Report Form</a>
+                        </div>
+                        <div class="emergency-contact">
+                            <strong>GitHub Security Lab</strong>
+                            <p>Via Security Advisories or <a href="https://hackerone.com/github" target="_blank">HackerOne</a></p>
+                            <p>For GitHub-hosted projects when maintainers are unresponsive</p>
+                        </div>
+                        <div class="emergency-contact">
+                            <strong>CISA (US Critical Infrastructure)</strong>
+                            <p><a href="mailto:central@cisa.dhs.gov">central@cisa.dhs.gov</a></p>
+                            <p>For vulnerabilities affecting US critical infrastructure</p>
+                            <a href="https://www.cisa.gov/report" target="_blank">Report Form</a>
+                        </div>
+                        <div class="emergency-contact">
+                            <strong>MITRE CVE Program</strong>
+                            <p>Request CVE ID through <a href="https://cveform.mitre.org/" target="_blank">CVE Request Form</a></p>
+                            <p>For publicly disclosed vulnerabilities needing a CVE ID</p>
+                        </div>
+                        <div class="emergency-contact">
+                            <strong>FIRST Member Teams</strong>
+                            <p>Find appropriate CSIRT via <a href="https://www.first.org/members/teams/" target="_blank">FIRST Directory</a></p>
+                            <p>Regional and organizational incident response teams</p>
+                        </div>
+                        <div class="emergency-contact">
+                            <strong>Ecosystem Coordinators</strong>
+                            <p>Check our <a href="#ecosystem-contacts">Ecosystem Contacts</a></p>
+                            <p>Language/platform-specific security teams (npm, PyPI, RubyGems, etc.)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="best-practices">
+                    <h3>🎯 Responsible Disclosure Best Practices</h3>
+                    <div class="practice-grid">
+                        <div class="practice-card do">
+                            <h4>✅ Do</h4>
+                            <ul>
+                                <li>Give maintainers reasonable time to fix</li>
+                                <li>Communicate clearly and professionally</li>
+                                <li>Provide actionable information</li>
+                                <li>Respect embargo dates</li>
+                                <li>Offer to help validate fixes</li>
+                                <li>Document your findings thoroughly</li>
+                                <li>Consider the impact on users</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card dont">
+                            <h4>❌ Don't</h4>
+                            <ul>
+                                <li>Publicly disclose before coordination</li>
+                                <li>Exploit vulnerabilities in production</li>
+                                <li>Access more data than needed to prove impact</li>
+                                <li>Threaten maintainers or demand payment</li>
+                                <li>Share vulnerability details with others</li>
+                                <li>Use automated scanning without permission</li>
+                                <li>Rush to publish for credit or bounties</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="additional-resources">
+                    <h3>📚 Additional Resources for Researchers</h3>
+                    <div class="resource-links">
+                        <a href="https://github.com/ossf/oss-vulnerability-guide/blob/main/finder-guide.md" target="_blank" class="resource-link featured">
+                            <strong>🌟 OpenSSF Finder's Guide to CVD</strong>
+                            <p>Comprehensive guide to coordinated vulnerability disclosure for security researchers working with OSS projects</p>
+                        </a>
+                        <a href="https://github.com/ossf/oss-vulnerability-guide/blob/main/runbook.md" target="_blank" class="resource-link featured">
+                            <strong>🌟 OpenSSF CVD Runbook</strong>
+                            <p>Step-by-step checklist for the coordinated vulnerability disclosure process</p>
+                        </a>
+                        <a href="https://github.com/ossf/oss-vulnerability-guide/tree/main/templates" target="_blank" class="resource-link featured">
+                            <strong>🌟 OpenSSF CVD Templates</strong>
+                            <p>Email templates for embargo notifications and vulnerability disclosures</p>
+                        </a>
+                        <a href="https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html" target="_blank" class="resource-link">
+                            <strong>OWASP Vulnerability Disclosure Cheat Sheet</strong>
+                            <p>Comprehensive guide to responsible disclosure</p>
+                        </a>
+                        <a href="https://www.iso.org/standard/72311.html" target="_blank" class="resource-link">
+                            <strong>ISO 29147 - Vulnerability Disclosure</strong>
+                            <p>International standard for vulnerability disclosure</p>
+                        </a>
+                        <a href="https://www.first.org/cvss/" target="_blank" class="resource-link">
+                            <strong>CVSS Scoring System</strong>
+                            <p>Calculate vulnerability severity scores</p>
+                        </a>
+                        <a href="https://github.com/security" target="_blank" class="resource-link">
+                            <strong>GitHub Security Features</strong>
+                            <p>Private reporting and security advisories</p>
+                        </a>
+                        <a href="https://www.cve.org/" target="_blank" class="resource-link">
+                            <strong>CVE Program</strong>
+                            <p>Request CVE IDs and search existing vulnerabilities</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="workflow-actions">
+                    <a href="#ecosystem-contacts" class="btn btn-primary">Find Ecosystem Contacts</a>
+                    <a href="#home" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Maintainer Workflow Section -->
+        <section id="maintainer-workflow" class="workflow-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">🛠️ Project Maintainer Workflow</h2>
+                <p class="section-subtitle">Secure your open source project with the right tools and practices.</p>
+                
+                <div class="workflow-categories">
+                    <div class="category-card">
+                        <h3>🚨 Incident Response</h3>
+                        <p>Responding to security vulnerabilities in your project</p>
+                        <a href="#scenarios" class="btn btn-primary">Get Emergency Help</a>
+                    </div>
+                    
+                    <div class="category-card">
+                        <h3>🛡️ Preventive Security</h3>
+                        <p>Implement security best practices and tools</p>
+                        <a href="#preventive-security" class="btn btn-primary">Security Best Practices</a>
+                    </div>
+                    
+                    <div class="category-card">
+                        <h3>📋 Security Policies</h3>
+                        <p>Create security policies and disclosure processes</p>
+                        <a href="#security-policies" class="btn btn-primary">Policy Templates</a>
+                    </div>
+                    
+                    <div class="category-card">
+                        <h3>🤝 Community Support</h3>
+                        <p>Connect with security experts and the OpenSSF community</p>
+                        <a href="#openssf-community" class="btn btn-primary">Join Community</a>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-grid">
+                        <a href="#ecosystem-contacts" class="action-item">
+                            <span class="action-icon">📞</span>
+                            <span>Find Security Contacts</span>
+                        </a>
+                        <a href="#resources" class="action-item">
+                            <span class="action-icon">📚</span>
+                            <span>Security Resources</span>
+                        </a>
+                        <a href="https://github.com/ossf/scorecard" class="action-item" target="_blank">
+                            <span class="action-icon">📊</span>
+                            <span>OpenSSF Scorecard</span>
+                        </a>
+                        <a href="https://slsa.dev" class="action-item" target="_blank">
+                            <span class="action-icon">🔒</span>
+                            <span>SLSA Framework</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="security-tooling-section">
+                    <h3>🛠️ Platform-Specific Security Tools</h3>
+                    <div class="platform-tools">
+                        <div class="platform-tool-card">
+                            <h4>GitHub Security</h4>
+                            <ul class="tool-list">
+                                <li><strong>Dependabot:</strong> Automated dependency updates and vulnerability alerts</li>
+                                <li><strong>CodeQL:</strong> Semantic code analysis for finding vulnerabilities</li>
+                                <li><strong>Secret Scanning:</strong> Detect and prevent secret leaks</li>
+                                <li><strong>Security Advisories:</strong> Private vulnerability reporting</li>
+                                <li><strong>Security Policies:</strong> SECURITY.md templates and guidance</li>
+                            </ul>
+                            <a href="https://github.com/features/security" class="btn btn-primary" target="_blank">Explore GitHub Security</a>
+                        </div>
+                        
+                        <div class="platform-tool-card">
+                            <h4>GitLab Security</h4>
+                            <ul class="tool-list">
+                                <li><strong>Dependency Scanning:</strong> Detect vulnerable dependencies</li>
+                                <li><strong>SAST (Static Application Security Testing):</strong> Find vulnerabilities in source code</li>
+                                <li><strong>DAST (Dynamic Application Security Testing):</strong> Test running applications</li>
+                                <li><strong>Container Scanning:</strong> Scan Docker images for vulnerabilities</li>
+                                <li><strong>License Compliance:</strong> Track and manage open source licenses</li>
+                                <li><strong>Security Dashboards:</strong> Centralized security reporting</li>
+                            </ul>
+                            <a href="https://docs.gitlab.com/ee/user/application_security/" class="btn btn-primary" target="_blank">Explore GitLab Security</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-tutorials">
+                    <h3>📺 Video Tutorials: Setting Up Security Tools</h3>
+                    <p class="section-subtitle">Learn how to configure security tools for your projects</p>
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/iMRyL4KnLzA" title="GitHub Dependabot Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>Getting Started with Dependabot</h4>
+                                <p>Learn how to enable and configure Dependabot for automated dependency updates</p>
+                                <span class="video-meta">GitHub • 8 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/WvNYv0ijE9s" title="GitHub CodeQL Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>CodeQL Code Scanning Setup</h4>
+                                <p>Configure CodeQL for automated security vulnerability detection in your code</p>
+                                <span class="video-meta">GitHub Security Lab • 12 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/sZPqLjtJG0Y" title="GitLab Security Scanning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>GitLab Security Scanning</h4>
+                                <p>Enable SAST, dependency scanning, and container scanning in GitLab CI/CD</p>
+                                <span class="video-meta">GitLab • 15 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/YZAiRhGKXLo" title="OWASP Dependency Check" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>OWASP Dependency-Check</h4>
+                                <p>Platform-agnostic dependency vulnerability scanning for any project</p>
+                                <span class="video-meta">OWASP • 10 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/TZ3MtXe4Pxo" title="Sigstore Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>Software Signing with Sigstore</h4>
+                                <p>Learn how to sign and verify your software artifacts with Sigstore/Cosign</p>
+                                <span class="video-meta">OpenSSF • 20 min</span>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-thumbnail">
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/E8zmWqLRi3Y" title="OpenSSF Scorecard" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>OpenSSF Scorecard Deep Dive</h4>
+                                <p>Assess and improve your project's security posture with Scorecard</p>
+                                <span class="video-meta">OpenSSF • 25 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-actions">
+                    <a href="#home" class="btn btn-secondary">Back to Home</a>
                 </div>
             </div>
         </section>
@@ -126,6 +612,240 @@
             </div>
         </section>
 
+        <!-- Preventive Security Section -->
+        <section id="preventive-security" class="workflow-section">
+            <div class="container">
+                <h2 class="section-title">🛡️ Preventive Security Best Practices</h2>
+                <p class="section-subtitle">Implement security controls and best practices before vulnerabilities occur</p>
+                
+                <div class="best-practices-intro">
+                    <p>Proactive security is more effective and less costly than reactive responses. These practices help you build security into your development process from the start.</p>
+                </div>
+                
+                <div class="practice-categories">
+                    <div class="practice-category">
+                        <h3>🔒 Code Security</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Static Application Security Testing (SAST)</h4>
+                                <p>Analyze source code for security vulnerabilities before deployment</p>
+                                <ul>
+                                    <li><strong>GitHub:</strong> CodeQL for automated code scanning</li>
+                                    <li><strong>GitLab:</strong> Built-in SAST scanners for multiple languages</li>
+                                    <li><strong>Open Source:</strong> Semgrep, Bandit (Python), ESLint plugins</li>
+                                </ul>
+                                <a href="https://github.com/features/security/code" class="btn btn-outline" target="_blank">Learn More</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>Secure Code Review</h4>
+                                <p>Establish security-focused code review processes</p>
+                                <ul>
+                                    <li>Review all code changes for security implications</li>
+                                    <li>Use security checklists and guidelines</li>
+                                    <li>Require multiple reviewers for sensitive code</li>
+                                    <li>Document security decisions and rationale</li>
+                                </ul>
+                                <a href="https://owasp.org/www-project-code-review-guide/" class="btn btn-outline" target="_blank">OWASP Code Review Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-category">
+                        <h3>📦 Dependency Management</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Dependency Scanning</h4>
+                                <p>Monitor and update dependencies with known vulnerabilities</p>
+                                <ul>
+                                    <li><strong>Dependabot:</strong> Automated dependency updates for GitHub</li>
+                                    <li><strong>Renovate:</strong> Multi-platform dependency automation</li>
+                                    <li><strong>Snyk:</strong> Comprehensive vulnerability scanning</li>
+                                    <li><strong>OWASP Dependency-Check:</strong> Free, open source scanner</li>
+                                </ul>
+                                <a href="https://docs.github.com/en/code-security/dependabot" class="btn btn-outline" target="_blank">Setup Dependabot</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>Software Bill of Materials (SBOM)</h4>
+                                <p>Maintain comprehensive inventory of software components</p>
+                                <ul>
+                                    <li>Generate SBOMs in standard formats (SPDX, CycloneDX)</li>
+                                    <li>Track all direct and transitive dependencies</li>
+                                    <li>Monitor for vulnerabilities in dependencies</li>
+                                    <li>Share SBOMs with users for transparency</li>
+                                </ul>
+                                <a href="https://www.cisa.gov/sbom" class="btn btn-outline" target="_blank">SBOM Resources</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-category">
+                        <h3>🔐 Access Control & Authentication</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Repository Security</h4>
+                                <p>Protect your code repository and development infrastructure</p>
+                                <ul>
+                                    <li>Enable two-factor authentication (2FA) for all contributors</li>
+                                    <li>Use branch protection rules and required reviews</li>
+                                    <li>Limit write access to trusted maintainers only</li>
+                                    <li>Enable signed commits for verification</li>
+                                    <li>Rotate access tokens and credentials regularly</li>
+                                </ul>
+                                <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features" class="btn btn-outline" target="_blank">GitHub Security Settings</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>Secret Management</h4>
+                                <p>Prevent accidental exposure of sensitive credentials</p>
+                                <ul>
+                                    <li>Never commit secrets, API keys, or passwords to repositories</li>
+                                    <li>Use GitHub/GitLab secret scanning to detect leaks</li>
+                                    <li>Employ environment variables and secret managers</li>
+                                    <li>Rotate compromised credentials immediately</li>
+                                    <li>Use pre-commit hooks to prevent secret commits</li>
+                                </ul>
+                                <a href="https://docs.github.com/en/code-security/secret-scanning" class="btn btn-outline" target="_blank">Secret Scanning</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-category">
+                        <h3>🏗️ Build & Release Security</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Supply Chain Security (SLSA)</h4>
+                                <p>Implement Supply-chain Levels for Software Artifacts framework</p>
+                                <ul>
+                                    <li><strong>SLSA Level 1:</strong> Version control and build service documentation</li>
+                                    <li><strong>SLSA Level 2:</strong> Hosted build service with provenance</li>
+                                    <li><strong>SLSA Level 3:</strong> Hardened builds with non-falsifiable provenance</li>
+                                    <li>Use GitHub Actions or GitLab CI with SLSA builders</li>
+                                </ul>
+                                <a href="https://slsa.dev/" class="btn btn-outline" target="_blank">Implement SLSA</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>Artifact Signing & Verification</h4>
+                                <p>Cryptographically sign releases for authenticity verification</p>
+                                <ul>
+                                    <li>Sign releases with GPG or Sigstore/Cosign</li>
+                                    <li>Publish signatures and checksums with releases</li>
+                                    <li>Provide verification instructions for users</li>
+                                    <li>Use keyless signing with Sigstore when possible</li>
+                                </ul>
+                                <a href="https://www.sigstore.dev/" class="btn btn-outline" target="_blank">Use Sigstore</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-category">
+                        <h3>📋 Security Policies & Documentation</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>Security Policy (SECURITY.md)</h4>
+                                <p>Create clear security vulnerability disclosure process</p>
+                                <ul>
+                                    <li>Define supported versions and security update schedule</li>
+                                    <li>Provide clear contact information for security reports</li>
+                                    <li>Explain the vulnerability disclosure process</li>
+                                    <li>Set expectations for response times</li>
+                                    <li>Offer PGP key for encrypted communication</li>
+                                </ul>
+                                <a href="https://github.com/ossf/oss-vulnerability-guide/tree/main/templates/security_policies" class="btn btn-outline" target="_blank">SECURITY.md Templates</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>Security Documentation</h4>
+                                <p>Document security features and best practices for users</p>
+                                <ul>
+                                    <li>Security considerations in README and documentation</li>
+                                    <li>Configuration security guidelines</li>
+                                    <li>Known security limitations and mitigations</li>
+                                    <li>Security-focused examples and tutorials</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-category">
+                        <h3>📊 Security Monitoring & Metrics</h3>
+                        <div class="practice-list">
+                            <div class="practice-item">
+                                <h4>OpenSSF Scorecard</h4>
+                                <p>Automated security health check for your project</p>
+                                <ul>
+                                    <li>Check for security best practices automatically</li>
+                                    <li>Get scored on 18+ security criteria</li>
+                                    <li>Display badge showing security posture</li>
+                                    <li>Improve score over time with actionable recommendations</li>
+                                </ul>
+                                <a href="https://securityscorecards.dev/" class="btn btn-outline" target="_blank">Check Your Score</a>
+                            </div>
+                            
+                            <div class="practice-item">
+                                <h4>OpenSSF Best Practices Badge</h4>
+                                <p>Self-certify against comprehensive security criteria</p>
+                                <ul>
+                                    <li>Passing: Basic good practices (60+ criteria)</li>
+                                    <li>Silver: Additional security measures</li>
+                                    <li>Gold: Exemplary security practices</li>
+                                    <li>Display badge to show commitment to security</li>
+                                </ul>
+                                <a href="https://bestpractices.coreinfrastructure.org/" class="btn btn-outline" target="_blank">Get Badge</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="getting-started-box">
+                    <h3>🚀 Getting Started</h3>
+                    <p>Don't try to implement everything at once. Start with these high-impact practices:</p>
+                    <ol>
+                        <li><strong>Enable Dependency Scanning:</strong> Set up Dependabot or Renovate (15 minutes)</li>
+                        <li><strong>Add SECURITY.md:</strong> Create vulnerability disclosure policy (30 minutes)</li>
+                        <li><strong>Enable 2FA:</strong> Require two-factor authentication for contributors (10 minutes)</li>
+                        <li><strong>Setup Branch Protection:</strong> Require code reviews for main branch (15 minutes)</li>
+                        <li><strong>Run OpenSSF Scorecard:</strong> Baseline your current security posture (5 minutes)</li>
+                    </ol>
+                    <p>Once these foundations are in place, gradually adopt additional practices based on your project's risk profile and resources.</p>
+                </div>
+                
+                <div class="workflow-actions">
+                    <a href="#maintainer-workflow" class="btn btn-secondary">Back to Maintainer Workflow</a>
+                    <a href="#resources" class="btn btn-outline">Browse More Resources</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ecosystem Contacts Section -->
+        <section id="ecosystem-contacts" class="ecosystem-contacts">
+            <div class="container">
+                <h2 class="section-title">Ecosystem-Specific Security Contacts</h2>
+                <p class="section-subtitle">Find security contacts for specific programming languages and technology ecosystems:</p>
+
+                <div class="ecosystem-filter">
+                    <input type="text" id="ecosystem-filter-input" placeholder="Search ecosystems, CSIRTs, or national organizations...">
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="ecosystem">Programming Ecosystems</option>
+                        <option value="csirt">CSIRTs & Response Teams</option>
+                        <option value="national">National Cybersecurity</option>
+                    </select>
+                </div>
+
+                <div class="ecosystem-grid" id="ecosystem-grid">
+                    <!-- Ecosystem contacts will be populated by JavaScript -->
+                </div>
+
+                <div class="ecosystem-help">
+                    <h3>Don't see your ecosystem?</h3>
+                    <p>If you can't find security contacts for your specific technology stack, <a href="#contact">contact our team</a> and we'll help you find the right resources.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Scenario Details Modal -->
         <div id="scenario-modal" class="modal">
             <div class="modal-content">
@@ -159,15 +879,21 @@
                 <div class="resource-grid">
                     <!-- Emergency Resources -->
                     <div class="resource-card" data-category="emergency">
-                        <h4>OpenSSF Security Incident Response</h4>
-                        <p>Coordinated vulnerability disclosure and incident response for open source projects.</p>
-                        <a href="#" class="btn btn-outline">Learn More</a>
+                        <h4>OpenSSF Vulnerability Guide</h4>
+                        <p>Coordinated vulnerability disclosure guide and templates for open source projects.</p>
+                        <a href="https://github.com/ossf/oss-vulnerability-guide" class="btn btn-outline" target="_blank">View Guide</a>
                     </div>
 
                     <div class="resource-card" data-category="emergency">
                         <h4>MITRE CVE Program</h4>
                         <p>Official CVE numbering authority and vulnerability database.</p>
                         <a href="https://cve.mitre.org/" class="btn btn-outline" target="_blank">Visit CVE.org</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="emergency">
+                        <h4>CISA Vulnerability Reporting</h4>
+                        <p>Report vulnerabilities affecting US critical infrastructure and systems.</p>
+                        <a href="https://www.cisa.gov/report" class="btn btn-outline" target="_blank">Report to CISA</a>
                     </div>
 
                     <!-- Tooling Resources -->
@@ -178,9 +904,21 @@
                     </div>
 
                     <div class="resource-card" data-category="tooling">
-                        <h4>OpenSSF Tooling Working Group</h4>
-                        <p>Community-driven security tooling recommendations and guidance.</p>
-                        <a href="#" class="btn btn-outline">Join Community</a>
+                        <h4>GitLab Security Scanning</h4>
+                        <p>SAST, DAST, dependency scanning, and container security for GitLab projects.</p>
+                        <a href="https://docs.gitlab.com/ee/user/application_security/" class="btn btn-outline" target="_blank">View Documentation</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="tooling">
+                        <h4>OpenSSF Scorecard</h4>
+                        <p>Automated security health metrics for open source projects.</p>
+                        <a href="https://securityscorecards.dev/" class="btn btn-outline" target="_blank">Check Your Score</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="tooling">
+                        <h4>Sigstore</h4>
+                        <p>Free software signing and verification infrastructure for the open source ecosystem.</p>
+                        <a href="https://www.sigstore.dev/" class="btn btn-outline" target="_blank">Start Signing</a>
                     </div>
 
                     <!-- Funding Resources -->
@@ -193,20 +931,131 @@
                     <div class="resource-card" data-category="funding">
                         <h4>OpenSSF Alpha-Omega</h4>
                         <p>Funding program focused on improving security of critical open source projects.</p>
-                        <a href="#" class="btn btn-outline">Learn About Grants</a>
+                        <a href="https://alpha-omega.dev/" class="btn btn-outline" target="_blank">Learn About Grants</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="funding">
+                        <h4>Sovereign Tech Fund</h4>
+                        <p>German government funding for open source infrastructure and security improvements.</p>
+                        <a href="https://www.sovereigntechfund.de/en" class="btn btn-outline" target="_blank">Explore Funding</a>
                     </div>
 
                     <!-- Education Resources -->
                     <div class="resource-card" data-category="education">
-                        <h4>OpenSSF Best Practices</h4>
-                        <p>Comprehensive guides for secure software development practices.</p>
-                        <a href="#" class="btn btn-outline">Read Guides</a>
+                        <h4>OpenSSF Best Practices Badge</h4>
+                        <p>Comprehensive criteria and self-certification for secure software development.</p>
+                        <a href="https://bestpractices.coreinfrastructure.org/" class="btn btn-outline" target="_blank">Get Badge</a>
                     </div>
 
                     <div class="resource-card" data-category="education">
-                        <h4>Secure Code Review Guidelines</h4>
-                        <p>Best practices for conducting security-focused code reviews.</p>
-                        <a href="#" class="btn btn-outline">View Guidelines</a>
+                        <h4>OWASP Top 10</h4>
+                        <p>Industry-standard awareness document for web application security risks.</p>
+                        <a href="https://owasp.org/www-project-top-ten/" class="btn btn-outline" target="_blank">Read Guide</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="education">
+                        <h4>Secure Software Development Fundamentals</h4>
+                        <p>Free professional courses on secure development practices from OpenSSF.</p>
+                        <a href="https://openssf.org/training/courses/" class="btn btn-outline" target="_blank">Take Courses</a>
+                    </div>
+                    
+                    <div class="resource-card" data-category="education">
+                        <h4>SLSA Framework</h4>
+                        <p>Supply-chain Levels for Software Artifacts security framework and implementation guide.</p>
+                        <a href="https://slsa.dev/" class="btn btn-outline" target="_blank">Learn SLSA</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OpenSSF Community Section -->
+        <section id="openssf-community" class="openssf-section">
+            <div class="container">
+                <h2 class="section-title">🤝 Join the OpenSSF Community</h2>
+                <p class="section-subtitle">
+                    Help secure the open source ecosystem by joining the Open Source Security Foundation (OpenSSF)
+                </p>
+                
+                <div class="openssf-intro">
+                    <div class="openssf-content">
+                        <h3>Why Join OpenSSF?</h3>
+                        <p>The OpenSSF brings together the industry's most important open source security initiatives under one foundation, providing:</p>
+                        <ul>
+                            <li><strong>Collaborative Security:</strong> Work with industry leaders to improve open source security</li>
+                            <li><strong>Best Practices:</strong> Access proven security frameworks like SLSA and Scorecard</li>
+                            <li><strong>Tools & Resources:</strong> Use and contribute to security tools that protect millions of projects</li>
+                            <li><strong>Education:</strong> Learn from security experts and share your knowledge</li>
+                            <li><strong>Funding:</strong> Access funding opportunities for security improvements</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ways-to-contribute">
+                    <h3>Ways to Get Involved</h3>
+                    <div class="contribution-grid">
+                        <div class="contribution-card">
+                            <div class="contrib-icon">💼</div>
+                            <h4>Organization Member</h4>
+                            <p>Join as a corporate member to help fund and guide OpenSSF initiatives</p>
+                            <a href="https://openssf.org/membership/" class="btn btn-primary" target="_blank">Become a Member</a>
+                        </div>
+                        
+                        <div class="contribution-card">
+                            <div class="contrib-icon">👥</div>
+                            <h4>Working Groups</h4>
+                            <p>Participate in technical working groups on security tooling, best practices, and more</p>
+                            <a href="https://openssf.org/community/" class="btn btn-primary" target="_blank">Join Working Groups</a>
+                        </div>
+                        
+                        <div class="contribution-card">
+                            <div class="contrib-icon">🛠️</div>
+                            <h4>Contribute to Projects</h4>
+                            <p>Help build security tools like Scorecard, Sigstore, and SLSA implementations</p>
+                            <a href="https://github.com/ossf" class="btn btn-primary" target="_blank">Contribute Code</a>
+                        </div>
+                        
+                        <div class="contribution-card">
+                            <div class="contrib-icon">🎓</div>
+                            <h4>Security Education</h4>
+                            <p>Help create educational content and security training materials</p>
+                            <a href="https://openssf.org/training/" class="btn btn-primary" target="_blank">Join Education</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="openssf-projects">
+                    <h3>Key OpenSSF Projects You Can Use Today</h3>
+                    <div class="project-grid">
+                        <div class="project-item">
+                            <strong>🔍 Scorecard</strong>
+                            <p>Automated security risk assessment for open source projects</p>
+                            <a href="https://securityscorecards.dev/" target="_blank">Try Scorecard</a>
+                        </div>
+                        <div class="project-item">
+                            <strong>✍️ Sigstore</strong>
+                            <p>Software signing and verification infrastructure</p>
+                            <a href="https://www.sigstore.dev/" target="_blank">Use Sigstore</a>
+                        </div>
+                        <div class="project-item">
+                            <strong>🔒 SLSA</strong>
+                            <p>Supply chain integrity framework and certification</p>
+                            <a href="https://slsa.dev/" target="_blank">Implement SLSA</a>
+                        </div>
+                        <div class="project-item">
+                            <strong>📋 GUAC</strong>
+                            <p>Software supply chain graph database and analysis</p>
+                            <a href="https://guac.sh/" target="_blank">Explore GUAC</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="community-cta">
+                    <h3>Ready to Make Open Source More Secure?</h3>
+                    <p>Join thousands of developers, security experts, and organizations working together</p>
+                    <div class="cta-buttons">
+                        <a href="https://openssf.org/" class="btn btn-primary btn-large" target="_blank">Join OpenSSF</a>
+                        <a href="https://openssf.org/community/" class="btn btn-outline" target="_blank">Explore Community</a>
+                        <a href="https://openssf.slack.com/" class="btn btn-outline" target="_blank">Join Slack</a>
                     </div>
                 </div>
             </div>
@@ -265,6 +1114,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#scenarios">Find Help</a></li>
+                        <li><a href="#ecosystem-contacts">Ecosystem Contacts</a></li>
                         <li><a href="#resources">Resources</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>

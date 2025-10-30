@@ -11,6 +11,7 @@ To provide a clear, actionable workflow that connects open-source maintainers fa
 ## 🚀 Features
 
 - **6 Key Security Scenarios**: Covers the most common security challenges maintainers face
+- **Ecosystem-Specific Contacts**: Direct security contacts for 14+ programming language ecosystems (Python, Rust, Node.js, Java/Apache, Eclipse, Kubernetes, etc.)
 - **Urgency-Based Workflow**: Clear visual indicators for time-sensitive situations
 - **Resource Directory**: Curated list of security tools, funding, and support options
 - **Mobile-First Design**: Responsive design that works on all devices

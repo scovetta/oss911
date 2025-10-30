@@ -13,6 +13,300 @@ const contactForm = document.getElementById('contact-form');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const resourceCards = document.querySelectorAll('.resource-card');
 
+// Ecosystem security contacts data with categories
+const ecosystemContacts = {
+    "eclipse": {
+        name: "Eclipse Foundation",
+        description: "Eclipse Foundation projects and infrastructure",
+        contactEmail: "security@eclipse-foundation.org",
+        websiteUrl: "https://www.eclipse.org/security/team/",
+        reportingProcess: "Email security team for vulnerabilities in Eclipse projects",
+        scope: "All Eclipse Foundation projects, plugins, and infrastructure",
+        category: "ecosystem"
+    },
+    "apache": {
+        name: "Apache Software Foundation",
+        description: "Apache projects including Tomcat, Kafka, Maven, and hundreds of other projects",
+        contactEmail: "security@apache.org",
+        websiteUrl: "https://www.apache.org/security/",
+        reportingProcess: "Private email to security team, see project-specific contacts for individual projects",
+        scope: "All Apache Software Foundation projects and infrastructure",
+        category: "ecosystem"
+    },
+    "rust": {
+        name: "Rust Programming Language",
+        description: "Rust compiler, standard library, Cargo, and official tooling",
+        contactEmail: "security@rust-lang.org",
+        websiteUrl: "https://www.rust-lang.org/policies/security",
+        reportingProcess: "Email security team with vulnerability details, 24-48 hour response time",
+        scope: "Rust language, compiler, Cargo, crates.io, and official Rust tools",
+        category: "ecosystem"
+    },
+    "nodejs": {
+        name: "Node.js",
+        description: "Node.js runtime and core modules",
+        contactEmail: "Via HackerOne platform",
+        websiteUrl: "https://nodejs.org/en/security",
+        reportingProcess: "Report via HackerOne bug bounty program or escalate to security@lists.openjsf.org",
+        scope: "Node.js runtime, core modules, and official Node.js tools",
+        category: "ecosystem"
+    },
+    "python": {
+        name: "Python Software Foundation",
+        description: "CPython interpreter, PyPI, and Python infrastructure",
+        contactEmail: "security@python.org",
+        websiteUrl: "https://www.python.org/dev/security/",
+        reportingProcess: "Email Python Security Response Team for interpreter and infrastructure vulnerabilities",
+        scope: "CPython, PyPI, Python.org infrastructure, and official Python tools",
+        category: "ecosystem"
+    },
+    "kubernetes": {
+        name: "Kubernetes & CNCF",
+        description: "Kubernetes orchestration platform and Cloud Native Computing Foundation projects",
+        contactEmail: "security@kubernetes.io",
+        websiteUrl: "https://kubernetes.io/docs/reference/issues-security/security/",
+        reportingProcess: "Report via HackerOne bug bounty program or email security team",
+        scope: "Kubernetes core, CNCF graduated projects, and cloud native ecosystem",
+        category: "ecosystem"
+    },
+    "openssf": {
+        name: "OpenSSF (Open Source Security Foundation)",
+        description: "Cross-ecosystem security initiatives and tools",
+        contactEmail: "openssf-technical-advisory-council@lists.openssf.org",
+        websiteUrl: "https://openssf.org/",
+        reportingProcess: "Contact via mailing list or specific project security contacts",
+        scope: "OpenSSF projects including Sigstore, SLSA, Scorecard, and security tooling",
+        category: "ecosystem"
+    },
+    "cncf": {
+        name: "Cloud Native Computing Foundation",
+        description: "Cloud native technologies and container orchestration",
+        contactEmail: "Via individual project contacts",
+        websiteUrl: "https://www.cncf.io/",
+        reportingProcess: "Contact specific project security teams - each CNCF project has own process",
+        scope: "CNCF projects including containerd, Prometheus, Envoy, Helm, and more",
+        category: "ecosystem"
+    },
+    "github": {
+        name: "GitHub Security",
+        description: "GitHub platform, GitHub Actions, and security features",
+        contactEmail: "Via GitHub Security Bug Bounty",
+        websiteUrl: "https://github.com/security",
+        reportingProcess: "Report via HackerOne bug bounty program",
+        scope: "GitHub.com platform, GitHub Actions, Codespaces, and GitHub security features",
+        category: "ecosystem"
+    },
+    "npm": {
+        name: "npm Registry",
+        description: "npm package registry and CLI tool",
+        contactEmail: "security@npmjs.com",
+        websiteUrl: "https://www.npmjs.com/policies/security",
+        reportingProcess: "Email security team for npm registry and package vulnerabilities",
+        scope: "npm registry, npm CLI, and npmjs.com infrastructure",
+        category: "ecosystem"
+    },
+    "pypi": {
+        name: "Python Package Index (PyPI)",
+        description: "Python package repository and distribution",
+        contactEmail: "admin@pypi.org",
+        websiteUrl: "https://pypi.org/security/",
+        reportingProcess: "Email for PyPI platform vulnerabilities, use project contacts for package issues",
+        scope: "PyPI platform, package distribution, and pypi.org infrastructure",
+        category: "ecosystem"
+    },
+    "rubygems": {
+        name: "RubyGems",
+        description: "Ruby package manager and gem repository",
+        contactEmail: "security@rubygems.org",
+        websiteUrl: "https://rubygems.org/security",
+        reportingProcess: "Email security team for RubyGems platform vulnerabilities",
+        scope: "RubyGems platform, gem distribution, and rubygems.org infrastructure",
+        category: "ecosystem"
+    },
+    "maven": {
+        name: "Maven Central",
+        description: "Maven package repository for Java ecosystem",
+        contactEmail: "Via Sonatype security",
+        websiteUrl: "https://central.sonatype.org/security/",
+        reportingProcess: "Contact Sonatype security team for Maven Central vulnerabilities",
+        scope: "Maven Central repository and associated tooling",
+        category: "ecosystem"
+    },
+    "linuxfoundation": {
+        name: "Linux Foundation",
+        description: "Linux kernel and Linux Foundation projects",
+        contactEmail: "security@kernel.org",
+        websiteUrl: "https://www.kernel.org/category/contact-us.html",
+        reportingProcess: "Email security team for Linux kernel vulnerabilities",
+        scope: "Linux kernel, Linux Foundation projects, and related infrastructure",
+        category: "ecosystem"
+    },
+    
+    // CSIRTs and National Cybersecurity Organizations
+    "cert-cc": {
+        name: "CERT/CC (Carnegie Mellon)",
+        description: "CERT Coordination Center - original CSIRT and vulnerability coordination",
+        contactEmail: "cert@cert.org",
+        websiteUrl: "https://www.sei.cmu.edu/about/divisions/cert/",
+        reportingProcess: "Use vulnerability reporting form or email for coordination center services",
+        scope: "Vulnerability coordination, incident response guidance, and cybersecurity research",
+        category: "csirt"
+    },
+    "cisa": {
+        name: "CISA (US Cybersecurity & Infrastructure Security Agency)",
+        description: "US national cybersecurity agency and critical infrastructure protection",
+        contactEmail: "contact@cisa.dhs.gov",
+        websiteUrl: "https://www.cisa.gov/",
+        reportingProcess: "Report via website, phone 1-844-SAY-CISA, or email for US infrastructure threats",
+        scope: "US critical infrastructure, government systems, and national cybersecurity coordination",
+        category: "national"
+    },
+    "ncsc-uk": {
+        name: "NCSC UK (National Cyber Security Centre)",
+        description: "UK's national cybersecurity authority",
+        contactEmail: "Via NCSC website reporting",
+        websiteUrl: "https://www.ncsc.gov.uk/",
+        reportingProcess: "Use online reporting system for UK cybersecurity incidents",
+        scope: "UK national cybersecurity, government and critical infrastructure protection",
+        category: "national"
+    },
+    "cert-eu": {
+        name: "CERT-EU",
+        description: "Computer Emergency Response Team for EU institutions, agencies and bodies",
+        contactEmail: "cert-eu@ec.europa.eu",
+        websiteUrl: "https://cert.europa.eu/",
+        reportingProcess: "Email CERT-EU for European Union institution cybersecurity incidents",
+        scope: "EU institutions, agencies, and bodies cybersecurity",
+        category: "csirt"
+    },
+    "enisa": {
+        name: "ENISA (European Union Agency for Cybersecurity)",
+        description: "EU cybersecurity agency providing guidance and coordination",
+        contactEmail: "Via ENISA contact form",
+        websiteUrl: "https://www.enisa.europa.eu/",
+        reportingProcess: "Use contact form for EU cybersecurity policy and guidance matters",
+        scope: "EU cybersecurity strategy, policy development, and member state coordination",
+        category: "national"
+    },
+    "first": {
+        name: "FIRST (Forum of Incident Response and Security Teams)",
+        description: "Global organization of CSIRTs and incident response teams",
+        contactEmail: "Via member team contacts",
+        websiteUrl: "https://www.first.org/",
+        reportingProcess: "Contact appropriate FIRST member team based on constituency",
+        scope: "Global CSIRT coordination, incident response best practices, and member support",
+        category: "csirt"
+    },
+    "cert-in": {
+        name: "CERT-In (Indian Computer Emergency Response Team)",
+        description: "India's national cybersecurity agency",
+        contactEmail: "cert-in@cert-in.org.in",
+        websiteUrl: "https://www.cert-in.org.in/",
+        reportingProcess: "Report cybersecurity incidents affecting Indian cyberspace",
+        scope: "Indian cyberspace protection and critical information infrastructure",
+        category: "national"
+    },
+    "jpcert": {
+        name: "JPCERT/CC (Japan Computer Emergency Response Team)",
+        description: "Japan's national cybersecurity coordination center",
+        contactEmail: "info@jpcert.or.jp",
+        websiteUrl: "https://www.jpcert.or.jp/english/",
+        reportingProcess: "Email for cybersecurity incidents affecting Japan",
+        scope: "Japanese cybersecurity coordination and Asia-Pacific region cooperation",
+        category: "national"
+    },
+    "kr-cert": {
+        name: "KrCERT/CC (Korea Computer Emergency Response Team)",
+        description: "South Korea's national cybersecurity response team",
+        contactEmail: "cert@cert.or.kr",
+        websiteUrl: "https://www.krcert.or.kr/",
+        reportingProcess: "Report cybersecurity incidents affecting Korean cyberspace",
+        scope: "South Korean cybersecurity protection and coordination",
+        category: "national"
+    },
+    "cncert": {
+        name: "CNCERT/CC (China Computer Emergency Response Team)",
+        description: "China's national computer network emergency response coordination center",
+        contactEmail: "cert@cert.org.cn",
+        websiteUrl: "https://www.cert.org.cn/",
+        reportingProcess: "Report network security incidents affecting Chinese networks",
+        scope: "Chinese network security and critical information infrastructure protection",
+        category: "national"
+    },
+    "auscert": {
+        name: "AusCERT (Australian Computer Emergency Response Team)",
+        description: "Australia's national computer emergency response team",
+        contactEmail: "alert@auscert.org.au",
+        websiteUrl: "https://www.auscert.org.au/",
+        reportingProcess: "Email for Australian cybersecurity incidents and threats",
+        scope: "Australian cybersecurity coordination and incident response",
+        category: "national"
+    },
+    "cert-br": {
+        name: "CERT.br (Brazilian Computer Emergency Response Team)",
+        description: "Brazil's national computer emergency response team",
+        contactEmail: "cert@cert.br",
+        websiteUrl: "https://www.cert.br/",
+        reportingProcess: "Report cybersecurity incidents affecting Brazilian networks",
+        scope: "Brazilian Internet security and incident coordination",
+        category: "national"
+    },
+    "cccs-canada": {
+        name: "CCCS (Canadian Centre for Cyber Security)",
+        description: "Canada's national cybersecurity authority",
+        contactEmail: "contact@cyber.gc.ca",
+        websiteUrl: "https://www.cyber.gc.ca/",
+        reportingProcess: "Report cybersecurity incidents via online portal or email",
+        scope: "Canadian cybersecurity protection and critical infrastructure defense",
+        category: "national"
+    },
+    "ncsc-nl": {
+        name: "NCSC Netherlands",
+        description: "Dutch National Cyber Security Centre",
+        contactEmail: "info@ncsc.nl",
+        websiteUrl: "https://www.ncsc.nl/",
+        reportingProcess: "Report cybersecurity incidents affecting Dutch critical infrastructure",
+        scope: "Netherlands cybersecurity and critical infrastructure protection",
+        category: "national"
+    },
+    "cert-fr": {
+        name: "CERT-FR",
+        description: "French national computer security incident response team",
+        contactEmail: "cert-fr.contact@ssi.gouv.fr",
+        websiteUrl: "https://www.cert.ssi.gouv.fr/",
+        reportingProcess: "Email for cybersecurity incidents affecting French government and infrastructure",
+        scope: "French government cybersecurity and critical infrastructure protection",
+        category: "national"
+    },
+    "cert-bund": {
+        name: "CERT-Bund (German Federal CERT)",
+        description: "Germany's federal computer emergency response team",
+        contactEmail: "certbund@bsi.bund.de",
+        websiteUrl: "https://www.bsi.bund.de/",
+        reportingProcess: "Report cybersecurity incidents affecting German federal government",
+        scope: "German federal government cybersecurity and critical infrastructure",
+        category: "national"
+    },
+    "cert-se": {
+        name: "CERT-SE (Swedish Computer Emergency Response Team)",
+        description: "Sweden's national computer emergency response team",
+        contactEmail: "cert-se@cert.se",
+        websiteUrl: "https://www.cert.se/",
+        reportingProcess: "Report cybersecurity incidents affecting Swedish networks",
+        scope: "Swedish cybersecurity coordination and incident response",
+        category: "national"
+    },
+    "cert-ee": {
+        name: "CERT-EE (Estonian Computer Emergency Response Team)",
+        description: "Estonia's national computer emergency response team",
+        contactEmail: "cert@cert.ee",
+        websiteUrl: "https://www.cert.ee/",
+        reportingProcess: "Report cybersecurity incidents affecting Estonian networks",
+        scope: "Estonian cybersecurity and digital infrastructure protection",
+        category: "national"
+    }
+};
+
 // Scenario data with detailed information
 const scenarioData = {
     vulnerability: {
@@ -228,9 +522,18 @@ const scenarioData = {
                 <li>Route you to appropriate resources</li>
                 <li>Provide general security guidance</li>
                 <li>Connect you with relevant experts</li>
-            </ul>
+                </div>
+            </ol>
         `,
         resources: [
+            {
+                title: "Ecosystem-Specific Security Contacts",
+                description: "Direct contacts for specific programming languages and ecosystems",
+                action: "Browse Contacts",
+                link: "#",
+                urgent: false,
+                callback: "showEcosystemContacts"
+            },
             {
                 title: "General Security Help",
                 description: "Contact our team for any security-related questions",
@@ -263,6 +566,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeSmoothScrolling();
     initializeModal();
+    initializeEcosystemContacts();
+    initializeNavigation(); // Add navigation initialization
 });
 
 // Scenario card click handlers
@@ -304,11 +609,13 @@ function openScenarioModal(scenarioKey) {
     let resourcesHTML = '<h4>Available Resources & Next Steps:</h4>';
     scenario.resources.forEach(resource => {
         const urgentClass = resource.urgent ? 'urgent-resource' : '';
+        const linkTarget = resource.callback ? '#' : resource.link;
+        const linkClick = resource.callback ? `onclick="${resource.callback}(); return false;"` : 'target="_blank"';
         resourcesHTML += `
             <div class="resource-link ${urgentClass}">
                 <h5>${resource.title}</h5>
                 <p>${resource.description}</p>
-                <a href="${resource.link}" class="btn btn-primary" target="_blank">${resource.action}</a>
+                <a href="${linkTarget}" class="btn btn-primary" ${linkClick}>${resource.action}</a>
             </div>
         `;
     });
@@ -341,6 +648,216 @@ function initializeModal() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.style.display === 'block') {
             closeModal();
+        }
+    });
+}
+
+// Show ecosystem contacts modal
+function showEcosystemContacts() {
+    modalTitle.textContent = "Ecosystem-Specific Security Contacts";
+    modalUrgency.innerHTML = '<div class="urgency-badge urgency-low">📍 ECOSYSTEM CONTACTS</div>';
+    
+    modalDescription.innerHTML = `
+        <p>Find security contacts for specific programming languages, package managers, and technology ecosystems:</p>
+        <div class="ecosystem-search">
+            <input type="text" id="ecosystem-search-input" placeholder="Search ecosystems..." onkeyup="filterEcosystems()">
+        </div>
+    `;
+
+    // Build ecosystem contacts
+    let contactsHTML = '<div class="ecosystem-contacts-grid">';
+    Object.entries(ecosystemContacts).forEach(([key, contact]) => {
+        contactsHTML += `
+            <div class="ecosystem-contact-card" data-ecosystem="${key}">
+                <h5>${contact.name}</h5>
+                <p class="ecosystem-description">${contact.description}</p>
+                <div class="contact-info">
+                    <div class="contact-detail">
+                        <strong>Contact:</strong> 
+                        ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
+                            contact.contactEmail : 
+                            `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
+                        }
+                    </div>
+                    <div class="contact-detail">
+                        <strong>Process:</strong> ${contact.reportingProcess}
+                    </div>
+                    <div class="contact-detail">
+                        <strong>Scope:</strong> ${contact.scope}
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a href="${contact.websiteUrl}" class="btn btn-outline" target="_blank">Visit Security Page</a>
+                </div>
+            </div>
+        `;
+    });
+    contactsHTML += '</div>';
+    
+    modalResources.innerHTML = contactsHTML;
+
+    modalActions.innerHTML = `
+        <a href="#contact" class="btn btn-secondary" onclick="closeModal()">Need General Help?</a>
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
+    `;
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    modalTitle.focus();
+}
+
+// Initialize ecosystem contacts section
+function initializeEcosystemContacts() {
+    const ecosystemGrid = document.getElementById('ecosystem-grid');
+    if (!ecosystemGrid) return;
+
+    let contactsHTML = '';
+    Object.entries(ecosystemContacts).forEach(([key, contact]) => {
+        const categoryLabel = {
+            'ecosystem': 'Programming Ecosystem',
+            'csirt': 'CSIRT',
+            'national': 'National Cybersecurity'
+        }[contact.category] || 'Other';
+        
+        contactsHTML += `
+            <div class="ecosystem-card" data-ecosystem="${key}">
+                <div class="ecosystem-header">
+                    <h4>${contact.name}</h4>
+                    <span class="category-badge category-${contact.category}">${categoryLabel}</span>
+                </div>
+                <div class="ecosystem-body">
+                    <p class="ecosystem-description">${contact.description}</p>
+                    <div class="ecosystem-details">
+                        <div class="contact-item">
+                            <strong>Contact:</strong>
+                            <span class="contact-value">
+                                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
+                                    contact.contactEmail : 
+                                    `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
+                                }
+                            </span>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Scope:</strong>
+                            <span class="contact-value">${contact.scope}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ecosystem-footer">
+                    <a href="${contact.websiteUrl}" class="btn btn-outline" target="_blank">Security Info</a>
+                    <button class="btn btn-secondary" onclick="showEcosystemDetails('${key}')">More Details</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    ecosystemGrid.innerHTML = contactsHTML;
+
+    // Initialize ecosystem filter
+    const filterInput = document.getElementById('ecosystem-filter-input');
+    if (filterInput) {
+        filterInput.addEventListener('keyup', filterEcosystemCards);
+    }
+    
+    // Initialize category filter
+    const categoryFilter = document.getElementById('category-filter');
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', filterEcosystemCards);
+    }
+}
+
+// Filter ecosystem cards in the main section
+function filterEcosystemCards() {
+    const searchTerm = document.getElementById('ecosystem-filter-input').value.toLowerCase();
+    const categoryFilter = document.getElementById('category-filter')?.value || 'all';
+    const cards = document.querySelectorAll('.ecosystem-card');
+    
+    cards.forEach(card => {
+        const ecosystem = card.dataset.ecosystem;
+        const contact = ecosystemContacts[ecosystem];
+        const searchText = `${contact.name} ${contact.description} ${contact.scope}`.toLowerCase();
+        
+        // Check category filter
+        const categoryMatch = categoryFilter === 'all' || contact.category === categoryFilter;
+        
+        // Check search term
+        const searchMatch = !searchTerm || searchText.includes(searchTerm);
+        
+        if (categoryMatch && searchMatch) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.3s ease-out';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Show detailed information about a specific ecosystem
+function showEcosystemDetails(ecosystemKey) {
+    const contact = ecosystemContacts[ecosystemKey];
+    if (!contact) return;
+
+    modalTitle.textContent = `${contact.name} Security Contact`;
+    modalUrgency.innerHTML = '<div class="urgency-badge urgency-low">📍 ECOSYSTEM CONTACT</div>';
+    
+    modalDescription.innerHTML = `
+        <p><strong>Description:</strong> ${contact.description}</p>
+        <p><strong>Reporting Process:</strong> ${contact.reportingProcess}</p>
+        <p><strong>Scope:</strong> ${contact.scope}</p>
+    `;
+
+    modalResources.innerHTML = `
+        <h4>Contact Information:</h4>
+        <div class="resource-link">
+            <h5>Security Contact</h5>
+            <p>Primary contact for security vulnerabilities</p>
+            <div class="contact-detail">
+                <strong>Email:</strong> 
+                ${contact.contactEmail.includes('mailto:') || contact.contactEmail.includes('Via ') ? 
+                    contact.contactEmail : 
+                    `<a href="mailto:${contact.contactEmail}">${contact.contactEmail}</a>`
+                }
+            </div>
+        </div>
+        <div class="resource-link">
+            <h5>Security Information Page</h5>
+            <p>Official security documentation and guidelines</p>
+            <a href="${contact.websiteUrl}" class="btn btn-primary" target="_blank">Visit Security Page</a>
+        </div>
+    `;
+
+    modalActions.innerHTML = `
+        <a href="#ecosystem-contacts" class="btn btn-secondary" onclick="closeModal()">Back to Contacts</a>
+        <button class="btn btn-outline" onclick="closeModal()">Close</button>
+    `;
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    modalTitle.focus();
+}
+
+// Filter ecosystem contacts based on search and category
+function filterEcosystems() {
+    const searchTerm = document.getElementById('ecosystem-filter-input').value.toLowerCase();
+    const categoryFilter = document.getElementById('category-filter')?.value || 'all';
+    const cards = document.querySelectorAll('.ecosystem-contact-card');
+    
+    cards.forEach(card => {
+        const ecosystem = card.dataset.ecosystem;
+        const contact = ecosystemContacts[ecosystem];
+        const searchText = `${contact.name} ${contact.description} ${contact.scope}`.toLowerCase();
+        
+        // Check category filter
+        const categoryMatch = categoryFilter === 'all' || contact.category === categoryFilter;
+        
+        // Check search term
+        const searchMatch = !searchTerm || searchText.includes(searchTerm);
+        
+        if (categoryMatch && searchMatch) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.3s ease-out';
+        } else {
+            card.style.display = 'none';
         }
     });
 }
@@ -545,3 +1062,59 @@ window.OSSSecurityNavigator = {
     filterResources,
     showNotification
 };
+
+// Navigation and section management
+function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('main > section');
+    sections.forEach(section => {
+        if (section.id === 'home') {
+            section.style.display = sectionId === 'home' ? 'block' : 'none';
+        } else {
+            section.style.display = section.id === sectionId ? 'block' : 'none';
+        }
+    });
+    
+    // Update active nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${sectionId}`) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// Initialize navigation
+function initializeNavigation() {
+    // Handle navigation clicks
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Show the target section
+            if (targetId) {
+                showSection(targetId);
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Update URL hash
+                history.pushState(null, null, `#${targetId}`);
+            }
+        });
+    });
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', () => {
+        const hash = window.location.hash.substring(1);
+        showSection(hash || 'home');
+    });
+    
+    // Show initial section based on URL hash
+    const initialHash = window.location.hash.substring(1);
+    showSection(initialHash || 'home');
+}
