@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSS Security Navigator - Get Security Help for Your Open Source Project</title>
+    <meta name="description" content="A referral service connecting open source maintainers with security resources, vulnerability response, and expert help.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🔐 OSS Security Navigator</h1>
+            <nav class="nav">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#scenarios" class="nav-link">Get Help</a>
+                <a href="#resources" class="nav-link">Resources</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Landing Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Security help for open source maintainers</h2>
+                    <p class="hero-subtitle">
+                        Facing a security challenge with your open source project?
+                        Get connected to the right resources and expert help quickly.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#scenarios" class="btn btn-primary">Find Security Help</a>
+                        <a href="#resources" class="btn btn-secondary">Browse Resources</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="security-icon">🛡️</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="mission">
+            <div class="container">
+                <div class="mission-content">
+                    <h3>Our Mission</h3>
+                    <p>To provide a clear, actionable workflow that connects open-source maintainers facing security challenges with appropriate, immediate, and high-quality assistance resources. Reduce friction and burnout by providing a single, trusted starting point for security help.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scenarios Section -->
+        <section id="scenarios" class="scenarios">
+            <div class="container">
+                <h2 class="section-title">What is your current security need?</h2>
+                <p class="section-subtitle">Choose the scenario that best matches your situation:</p>
+
+                <div class="scenario-grid">
+                    <!-- Scenario 1: Critical Vulnerability -->
+                    <div class="scenario-card urgency-high" data-scenario="vulnerability">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-high">🚨 HIGH URGENCY</div>
+                            <h3>New/Serious Vulnerability Found</h3>
+                        </div>
+                        <p>You've discovered or been informed of a serious security vulnerability that needs immediate response.</p>
+                        <button class="btn btn-primary">Get Immediate Help</button>
+                    </div>
+
+                    <!-- Scenario 2: Tool Configuration -->
+                    <div class="scenario-card urgency-medium" data-scenario="tools">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-medium">⚠️ MEDIUM</div>
+                            <h3>Need Help Configuring Security Tools</h3>
+                        </div>
+                        <p>Need guidance setting up SAST, DAST, SCA, or other security tools for your project.</p>
+                        <button class="btn btn-primary">Find Tool Help</button>
+                    </div>
+
+                    <!-- Scenario 3: Code Fix Help -->
+                    <div class="scenario-card urgency-medium" data-scenario="fix">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-medium">⚠️ MEDIUM</div>
+                            <h3>Need Help with a Security Fix</h3>
+                        </div>
+                        <p>Need expert code review, patch assistance, or technical guidance for implementing a security fix.</p>
+                        <button class="btn btn-primary">Request Code Help</button>
+                    </div>
+
+                    <!-- Scenario 4: CVE Reporting -->
+                    <div class="scenario-card urgency-medium-high" data-scenario="cve">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-medium-high">🔴 MEDIUM-HIGH</div>
+                            <h3>Reporting a New CVE</h3>
+                        </div>
+                        <p>Need guidance on the CVE reporting process and coordinated disclosure best practices.</p>
+                        <button class="btn btn-primary">CVE Process Guide</button>
+                    </div>
+
+                    <!-- Scenario 5: Burnout/Sustainability -->
+                    <div class="scenario-card urgency-low" data-scenario="burnout">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-low">💚 SUPPORT</div>
+                            <h3>Burning Out & Need Help</h3>
+                        </div>
+                        <p>Feeling overwhelmed with security responsibilities and need support, funding, or help with delegation.</p>
+                        <button class="btn btn-primary">Find Support</button>
+                    </div>
+
+                    <!-- Scenario 6: General Help -->
+                    <div class="scenario-card urgency-low" data-scenario="general">
+                        <div class="scenario-header">
+                            <div class="urgency-badge urgency-low">❓ GENERAL</div>
+                            <h3>General Security Question</h3>
+                        </div>
+                        <p>Have a security question but not sure which category it fits into? Start here.</p>
+                        <button class="btn btn-primary">Ask Our Team</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scenario Details Modal -->
+        <div id="scenario-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title"></h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-urgency" class="urgency-info"></div>
+                    <div id="modal-description"></div>
+                    <div id="modal-resources" class="resource-links"></div>
+                    <div id="modal-actions" class="modal-actions"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <section id="resources" class="resources">
+            <div class="container">
+                <h2 class="section-title">Security Resources Directory</h2>
+                <p class="section-subtitle">Browse available security resources by category:</p>
+
+                <div class="resource-filters">
+                    <button class="filter-btn active" data-filter="all">All Resources</button>
+                    <button class="filter-btn" data-filter="emergency">Emergency Response</button>
+                    <button class="filter-btn" data-filter="tooling">Security Tooling</button>
+                    <button class="filter-btn" data-filter="funding">Funding & Support</button>
+                    <button class="filter-btn" data-filter="education">Education & Guides</button>
+                </div>
+
+                <div class="resource-grid">
+                    <!-- Emergency Resources -->
+                    <div class="resource-card" data-category="emergency">
+                        <h4>OpenSSF Security Incident Response</h4>
+                        <p>Coordinated vulnerability disclosure and incident response for open source projects.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+
+                    <div class="resource-card" data-category="emergency">
+                        <h4>MITRE CVE Program</h4>
+                        <p>Official CVE numbering authority and vulnerability database.</p>
+                        <a href="https://cve.mitre.org/" class="btn btn-outline" target="_blank">Visit CVE.org</a>
+                    </div>
+
+                    <!-- Tooling Resources -->
+                    <div class="resource-card" data-category="tooling">
+                        <h4>GitHub Security Features</h4>
+                        <p>Dependabot, CodeQL, and other free security tools for OSS projects.</p>
+                        <a href="https://github.com/features/security" class="btn btn-outline" target="_blank">Explore Tools</a>
+                    </div>
+
+                    <div class="resource-card" data-category="tooling">
+                        <h4>OpenSSF Tooling Working Group</h4>
+                        <p>Community-driven security tooling recommendations and guidance.</p>
+                        <a href="#" class="btn btn-outline">Join Community</a>
+                    </div>
+
+                    <!-- Funding Resources -->
+                    <div class="resource-card" data-category="funding">
+                        <h4>GitHub Sponsors</h4>
+                        <p>Direct funding for open source maintainers and their security work.</p>
+                        <a href="https://github.com/sponsors" class="btn btn-outline" target="_blank">Apply for Funding</a>
+                    </div>
+
+                    <div class="resource-card" data-category="funding">
+                        <h4>OpenSSF Alpha-Omega</h4>
+                        <p>Funding program focused on improving security of critical open source projects.</p>
+                        <a href="#" class="btn btn-outline">Learn About Grants</a>
+                    </div>
+
+                    <!-- Education Resources -->
+                    <div class="resource-card" data-category="education">
+                        <h4>OpenSSF Best Practices</h4>
+                        <p>Comprehensive guides for secure software development practices.</p>
+                        <a href="#" class="btn btn-outline">Read Guides</a>
+                    </div>
+
+                    <div class="resource-card" data-category="education">
+                        <h4>Secure Code Review Guidelines</h4>
+                        <p>Best practices for conducting security-focused code reviews.</p>
+                        <a href="#" class="btn btn-outline">View Guidelines</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Need Additional Help?</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>General Security Questions</h3>
+                        <p>If you're not sure which category your security need fits into, or if you need help that doesn't match any of the scenarios above, reach out to our general security help team.</p>
+                        <div class="contact-methods">
+                            <a href="mailto:security-help@example.org" class="btn btn-primary">
+                                📧 security-help@example.org
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Quick Contact Form</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="project">Project Name (Optional)</label>
+                                <input type="text" id="project" name="project">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Describe Your Security Need</label>
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>OSS Security Navigator</h4>
+                    <p>Connecting open source maintainers with security resources and expert help.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#scenarios">Find Help</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency Contact</h4>
+                    <p>For critical vulnerabilities:</p>
+                    <a href="mailto:security-help@example.org">security-help@example.org</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OSS Security Navigator. Built for the open source community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
